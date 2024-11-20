@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+.navbar {
+  background-color: #050505;
+  padding: 0px 15px;
+  text-align: center;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  font-style: italic;
+  background: linear-gradient(45deg, #c9b883f1, #e7e7e7, #329685, #c8ca56);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 3px;
+  text-transform: capitalize;
+  text-shadow: 1px 1px 2px rgba(255, 252, 252, 0.2);
+  padding: 0;
+  transition: transform 0.4s ease, color 0.4s ease;
+  
+  /* Ajustes adicionales */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  margin-right: 0; /* Reduce el margen derecho */
+}
+
+
+.navbar-title:hover {
+  transform: scale(1.1);
+  color: #13caeb;
+}
+
+/* Estilo para los enlaces */
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links a {
+  font-family: 'Poppins', sans-serif; /* Fuente Poppins para los enlaces */
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+@media (max-width: 740px) {
+  .navbar-links a{
+    padding: 0%;
+  }
+  .navbar-title{
+    display: none;
+  }
+}
+
+.navbar-links a:hover {
+  background-color: #a39c76;
+  color: #333;
+}
+
+.navbar-links a::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #c5b668, #329685, #2375ac);
+  transition: width 0.3s ease-in-out;
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+/* Estilo para el campo de búsqueda */
+.navbar-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.navbar-search input {
+  font-family: 'Poppins', sans-serif;
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+  margin-right: 10px;
+}
+
+.navbar-search button {
+  font-family: 'Poppins', sans-serif;
+  padding: 5px 10px;
+  background-color: #555;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.navbar-search button:hover {
+  background-color: #777;
+}
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  width: 100px; 
+  margin-right: 15px; 
+}

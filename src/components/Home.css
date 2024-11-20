@@ -1,0 +1,37 @@
+/* Styles for the main container with background */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-image: url('C:/Users/invit/OneDrive/Escritorio/tienda_retro/tienda_retro/src/components/assets/pexels-bohlemedia-1884574.jpg'); 
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: #fff;
+  }
+  
+
+  .categories-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px; 
+  }
+  
+ 
+  .categories-title {
+    margin-right: 51%;
+    margin-bottom: 10px;
+    color: #9a9d61;
+  }
+  
+  
+  .categories-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
