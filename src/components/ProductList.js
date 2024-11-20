@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { customFetch } from '../Helpers/fetch'; // Asegúrate de que esté correctamente importado
+import { customFetch } from '../Helpers/fetch'; 
 import './ProductList.css';
 
 const ProductList = () => {
   const { categoryName } = useParams(); // Obtener la categoría actual desde la URL
   const [products, setProducts] = useState([]); // Todos los productos del backend
-  const [filterProducts, setFilterProducts] = useState([]); // Filtro global
+  const [filterProducts, setFilterProducts] = useState([]); // Productos filtrados
   const [searchTerm, setSearchTerm] = useState(''); // Término de búsqueda
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const [loading, setLoading] = useState(true); // Estado de carga
@@ -16,15 +16,14 @@ const ProductList = () => {
   const fetchProducts = async () => {
     try {
       const response = await customFetch({
-        endpoint: `api/jerseys/?q_filter=${categoryName}`, // Ajusta el endpoint según tu backend
+        endpoint: `api/jerseys/?q_filter=${categoryName}`, // Ajuste del endpoint 
         method: 'GET',
       });
 
       if (response.status === 200) {
         console.log(response)
-        // const data = response.data.filter( (product) => product.category === categoryName) // Filtro de la Consulta de backend por categorias
         setProducts(response.data); // Almacena los productos originales del backend
-        setFilterProducts(response.data); // Almacena los productos que se listan del backend
+        setFilterProducts(response.data); // Almacena los productos filtrados
       } else {
         console.error('Error al obtener los productos:', response);
       }
@@ -38,11 +37,10 @@ const ProductList = () => {
   // Efecto para obtener productos cuando cambia la categoría
   useEffect(() => {
     setLoading(true); // Activa el estado de carga
-    fetchProducts(); // Llama al fetch
+    fetchProducts(); 
     setSearchTerm(''); // Resetea la barra de búsqueda
     setCurrentPage(1); // Vuelve a la primera página
-  }, []);
-
+  }, [categoryName]);
 
   // Manejar el término de búsqueda
   const handleSearch = (e) => {
@@ -51,19 +49,20 @@ const ProductList = () => {
     const arrayFilter = products.filter(
       (product) =>
         product.category === categoryName && // Filtra por categoría actual
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) // Filtra por término de búsqueda
-    )
+        product.name.toLowerCase().includes(e.target.value.toLowerCase()) // Filtra por término de búsqueda
+    );
 
-    setFilterProducts(arrayFilter)
+    setFilterProducts(arrayFilter);
 
     if (e.target.value === '') {
-      setFilterProducts(products)
+      setFilterProducts(products);
     }
   };
 
   // Calcular los productos de la página actual
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filterProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   // Cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -87,8 +86,8 @@ const ProductList = () => {
         <p>Cargando productos...</p>
       ) : (
         <div className="products-container">
-          {filterProducts.length > 0 ? (
-            filterProducts.map((product) => (
+          {currentProducts.length > 0 ? (
+            currentProducts.map((product) => (
               <div key={product.id} className="product-card">
                 <div className="product-image">
                   <img src={product.imageUrl} alt={product.name} />
