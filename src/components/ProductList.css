@@ -12,9 +12,10 @@
   font-size: 2.5rem;
   color: #333;
 }
+
 @media (max-width: 600px) {
   .category-title {
-    margin-left:0;
+    margin-left: 0;
     text-align: center;
   }
 }
@@ -88,8 +89,17 @@
 }
 
 .product-price {
-  color: red;
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* Aumenta el tamaño para hacer el precio más visible */
+  font-weight: bold; /* Dale énfasis al precio con un peso de fuente más grueso */
+  color: #e74c3c; /* Rojo suave para destacar, pero no tan intenso */
+  text-transform: uppercase; /* Transforma el texto a mayúsculas para un estilo más moderno */
+  margin-top: 10px; /* Agrega espacio por encima */
+  letter-spacing: 1px; /* Aumenta el espaciado entre las letras para una mejor legibilidad */
+}
+
+.product-price span {
+  font-size: 1.2rem; /* Un tamaño más pequeño para el símbolo de la moneda */
+  color: #bdc3c7; /* Un color más suave para el símbolo de la moneda */
 }
 
 /* Paginación */
@@ -120,4 +130,34 @@
 .pagination button:hover:not(.active) {
   background-color: #94917e;
   transform: scale(1.05);
+}
+
+/* Selector de tallas personalizado */
+.size-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.size-label {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+.MuiFormControl-root {
+  width: 120px; /* Reducido para hacer el selector más angosto */
+}
+
+.MuiInputLabel-root {
+  font-size: 12px; /* Texto más pequeño */
+}
+
+.MuiSelect-root {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 8px; /* Menor padding para que el botón no sea tan grande */
+  font-size: 14px; /* Texto más compacto */
+  width: auto;
 }

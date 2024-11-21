@@ -12,9 +12,9 @@ const Navbar = () => {
       </div>
       
       <div className='navbar-links'>
-        <Link to='/' className='navbar-link'>Home</Link>
-        <Link to='/about' className='navbar-link'>About</Link>
-        <Link to='/contact' className='navbar-link'>Contact</Link>
+        <Link to='/' className='navbar-link'>Inicio</Link>
+        <Link to='/about' className='navbar-link'>Nosotros</Link>
+        <Link to='/contact' className='navbar-link'>Contacto</Link>
       </div>
     </nav>
   );
