@@ -1,6 +1,11 @@
 // import React, { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
-// import { customFetch } from '../Helpers/fetch'; 
+// import { customFetch } from '../Helpers/fetch';
+// import Box from '@mui/material/Box';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select from '@mui/material/Select';
 // import './ProductList.css';
 
 // const ProductList = () => {
@@ -16,12 +21,11 @@
 //   const fetchProducts = async () => {
 //     try {
 //       const response = await customFetch({
-//         endpoint: `api/jerseys/?q_filter=${categoryName}`, // Ajuste del endpoint 
+//         endpoint: `api/jerseys/?q_filter=${categoryName}`,
 //         method: 'GET',
 //       });
 
 //       if (response.status === 200) {
-//         console.log(response)
 //         setProducts(response.data); // Almacena los productos originales del backend
 //         setFilterProducts(response.data); // Almacena los productos filtrados
 //       } else {
@@ -37,7 +41,7 @@
 //   // Efecto para obtener productos cuando cambia la categoría
 //   useEffect(() => {
 //     setLoading(true); // Activa el estado de carga
-//     fetchProducts(); 
+//     fetchProducts();
 //     setSearchTerm(''); // Resetea la barra de búsqueda
 //     setCurrentPage(1); // Vuelve a la primera página
 //   }, [categoryName]);
@@ -82,27 +86,52 @@
 //       </div>
 
 //       {/* Productos */}
-//       {loading ? (
-//         <p>Cargando productos...</p>
-//       ) : (
-//         <div className="products-container">
-//           {currentProducts.length > 0 ? (
-//             currentProducts.map((product) => (
-//               <div key={product.id} className="product-card">
-//                 <div className="product-image">
-//                   <img src={product.imageUrl} alt={product.name} />
-//                 </div>
-//                 <h3>{product.name}</h3>
-//                 <h4>{product.size}</h4>
-//                 <p className="product-price">${product.price}</p>
-//                 <button>Comprar</button>
-//               </div>
-//             ))
-//           ) : (
-//             <p>No hay productos en esta categoría</p>
-//           )}
+// {loading ? (
+//   <p>Cargando productos...</p>
+// ) : (
+//   <div className="products-container">
+//     {currentProducts.length > 0 ? (
+//       currentProducts.map((product) => (
+//         <div key={product.id} className="product-card">
+//           <div className="product-image">
+//             <img src={product.imageUrl} alt={product.name} />
+//           </div>
+//           <h3>{product.name}</h3>
+
+//           {/* Selector de tallas con texto "Tallas disponibles:" */}
+//           <div className="size-selector">
+//             <span className="size-label">Tallas disponibles:</span>
+//             <Box sx={{  width: "30%", height: "15%" }}>
+//               <FormControl fullWidth>
+//                 <InputLabel id={`size-select-label-${product.id}`}>Talla</InputLabel>
+//                 <Select  
+//                   labelId={`size-select-label-${product.id}`}
+//                   id={`size-select-${product.id}`}
+//                   defaultValue="" // Valor inicial vacío
+//                   onChange={(e) =>
+//                     console.log(`Producto: ${product.name}, Talla seleccionada: ${e.target.value}`)
+//                   }
+//                   sx={{ fontSize: '14px' }} // Ajustamos el texto para que sea más compacto
+//                 >
+//                   {product.size.split(' ').map((size, index) => (
+//                     <MenuItem key={index} value={size}>
+//                       {size}
+//                     </MenuItem>
+//                   ))}
+//                 </Select>
+//               </FormControl>
+//             </Box>
+//           </div>
+
+//           <p className="product-price">${product.price}</p>
+//           <button>Comprar</button>
 //         </div>
-//       )}
+//       ))
+//     ) : (
+//       <p>No hay productos en esta categoría</p>
+//     )}
+//   </div>
+// )}
 
 //       {/* Paginación */}
 //       <div className="pagination">
@@ -121,7 +150,6 @@
 // };
 
 // export default ProductList;
-  
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { customFetch } from '../Helpers/fetch';
@@ -210,52 +238,64 @@ const ProductList = () => {
       </div>
 
       {/* Productos */}
-{loading ? (
-  <p>Cargando productos...</p>
-) : (
-  <div className="products-container">
-    {currentProducts.length > 0 ? (
-      currentProducts.map((product) => (
-        <div key={product.id} className="product-card">
-          <div className="product-image">
-            <img src={product.imageUrl} alt={product.name} />
-          </div>
-          <h3>{product.name}</h3>
+      {loading ? (
+        <p>Cargando productos...</p>
+      ) : (
+        <div className="products-container">
+          {currentProducts.length > 0 ? (
+            currentProducts.map((product) => (
+              <div key={product.id} className="product-card">
+                <div className="product-image">
+                  <img src={product.imageUrl} alt={product.name} />
+                </div>
+                <h3>{product.name}</h3>
 
-          {/* Selector de tallas con texto "Tallas disponibles:" */}
-          <div className="size-selector">
-            <span className="size-label">Tallas disponibles:</span>
-            <Box sx={{  width: "30%", height: "15%" }}>
-              <FormControl fullWidth>
-                <InputLabel id={`size-select-label-${product.id}`}>Talla</InputLabel>
-                <Select  
-                  labelId={`size-select-label-${product.id}`}
-                  id={`size-select-${product.id}`}
-                  defaultValue="" // Valor inicial vacío
-                  onChange={(e) =>
-                    console.log(`Producto: ${product.name}, Talla seleccionada: ${e.target.value}`)
-                  }
-                  sx={{ fontSize: '14px' }} // Ajustamos el texto para que sea más compacto
+                {/* Selector de tallas */}
+                <div className="size-selector">
+                  <span className="size-label">Tallas disponibles:</span>
+                  <Box sx={{ width: '30%', height: '15%' }}>
+                    <FormControl fullWidth>
+                      <InputLabel id={`size-select-label-${product.id}`}>Talla</InputLabel>
+                      <Select
+                        labelId={`size-select-label-${product.id}`}
+                        id={`size-select-${product.id}`}
+                        defaultValue="" // Valor inicial vacío
+                        onChange={(e) =>
+                          console.log(
+                            `Producto: ${product.name}, Talla seleccionada: ${e.target.value}`
+                          )
+                        }
+                        sx={{ fontSize: '14px' }} // Ajustamos el texto para que sea más compacto
+                      >
+                        {product.size.split(' ').map((size, index) => (
+                          <MenuItem key={index} value={size}>
+                            {size}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
+
+                <p className="product-price">${product.price}</p>
+
+                {/* Botón Comprar con enlace a WhatsApp */}
+                <a
+                  href={`https://wa.me/573043909770?text=¡Hola!%20Estoy%20interesado%20en%20el%20producto:%20${encodeURIComponent(
+                    product.name
+                  )}.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {product.size.split(' ').map((size, index) => (
-                    <MenuItem key={index} value={size}>
-                      {size}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-          </div>
-
-          <p className="product-price">${product.price}</p>
-          <button>Comprar</button>
+                  <button>Comprar</button>
+                </a>
+              </div>
+            ))
+          ) : (
+            <p>No hay productos en esta categoría</p>
+          )}
         </div>
-      ))
-    ) : (
-      <p>No hay productos en esta categoría</p>
-    )}
-  </div>
-)}
+      )}
 
       {/* Paginación */}
       <div className="pagination">
