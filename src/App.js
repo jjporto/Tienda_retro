@@ -35,7 +35,7 @@ const App = () => {
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <div style={{ flex: 1, display: 'flex', position: 'relative' }}>
           {showSidebar && <Sidebar />}
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1 ,background: '#f4f4f4'}}>
             <Routes>
               <Route path="/" element={<Home onCategoryClick={setShowSidebar} />} />
               <Route path="/category/:categoryName" element={<ProductListWrapper />} />
